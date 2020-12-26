@@ -1,0 +1,14 @@
+[
+  {
+    "id": 2,
+    "name":"Kim chi"
+  },
+  {
+
+    "id": 3,
+    "destroy":true
+  },
+  {
+    "name": "Gukbob"
+  }
+]
