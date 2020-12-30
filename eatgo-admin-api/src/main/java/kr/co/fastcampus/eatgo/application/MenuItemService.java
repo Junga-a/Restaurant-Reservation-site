@@ -1,7 +1,8 @@
 package kr.co.fastcampus.eatgo.application;
 
-import com.example.eatgocommon.domain.MenuItem;
-import com.example.eatgocommon.domain.MenuItemRepository;
+
+import kr.co.fastcampus.eatgo.domain.MenuItem;
+import kr.co.fastcampus.eatgo.domain.MenuItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 @Transactional
 public class MenuItemService {
-    private MenuItemRepository menuItemRepository;
+    private static MenuItemRepository menuItemRepository;
 
     @Autowired
     public MenuItemService(MenuItemRepository menuItemRepository) {
@@ -30,5 +31,9 @@ public class MenuItemService {
         }
         menuItem.setRestaurantId(restaurantId);
         menuItemRepository.save(menuItem);
+    }
+
+    public static List<MenuItem> getMenuItems(Long restaurantId) {
+        return menuItemRepository.findAllByRestaurantId(restaurantId);
     }
 }

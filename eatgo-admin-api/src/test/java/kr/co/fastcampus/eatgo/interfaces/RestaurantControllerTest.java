@@ -1,10 +1,8 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
 import kr.co.fastcampus.eatgo.application.RestaurantService;
-import com.example.eatgocommon.domain.MenuItem;
-import com.example.eatgocommon.domain.Restaurant;
-import com.example.eatgocommon.domain.RestaurantNotFoundException;
-import com.example.eatgocommon.domain.Review;
+import kr.co.fastcampus.eatgo.domain.Restaurant;
+import kr.co.fastcampus.eatgo.domain.RestaurantNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.StringContains.containsString;
@@ -35,7 +32,7 @@ public class RestaurantControllerTest {
 
     @MockBean(RestaurantService.class)
     private RestaurantService restaurantService;
-    private MenuItem MenuItem;
+    private kr.co.fastcampus.eatgo.domain.MenuItem MenuItem;
 
 
     @Test
@@ -67,17 +64,6 @@ public class RestaurantControllerTest {
                 .name("JOKER House")
                 .address("Seoul")
                 .build();
-        MenuItem menuItem = MenuItem.builder()
-                .name("Kimchi")
-                .build();
-        restaurant.setMenuItems(Arrays.asList(menuItem));
-        Review review = Review.builder()
-                .name("JOKER")
-                .score(5)
-                .description("Great!")
-                .build();
-        restaurant.setReviews(Arrays.asList(review));
-
         given(restaurantService.getRestaurant(1004L)).willReturn(restaurant);
 
         mvc.perform(get("/restaurants/1004"))
@@ -87,14 +73,9 @@ public class RestaurantControllerTest {
                 ))
                 .andExpect(content().string(
                         containsString("\"name\":\"JOKER House\"")
-                ))
-                .andExpect(content().string(
-                        containsString("Kimchi")
-                ))
-                .andExpect(content().string(
-                        containsString("Great!")
                 ));
     }
+
     @Test
     public void detailWithNotExisted() throws Exception {
             given(restaurantService.getRestaurant(404L))

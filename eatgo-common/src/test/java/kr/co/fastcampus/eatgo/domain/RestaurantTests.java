@@ -1,33 +1,33 @@
 package kr.co.fastcampus.eatgo.domain;
 
-
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class RestaurantTest {
+public class RestaurantTests {
+
     @Test
     public void creation() {
         Restaurant restaurant = Restaurant.builder()
-                .id(1234L)
-                .name("Bob Zip")
+                .id(1004L)
+                .name("Bob zip")
                 .address("Seoul")
                 .build();
-        assertThat(restaurant.getName()).isEqualTo("Bob Zip");
+
+        assertThat(restaurant.getId()).isEqualTo(1004L);
+        assertThat(restaurant.getName()).isEqualTo("Bob zip");
         assertThat(restaurant.getAddress()).isEqualTo("Seoul");
-        assertThat(restaurant.getId()).isEqualTo(1234L);
     }
 
     @Test
     public void information() {
         Restaurant restaurant = Restaurant.builder()
-                .id(1234L)
-                .name("Bob Zip")
+                .id(1004L)
+                .name("Bob zip")
                 .address("Seoul")
                 .build();
 
-        assertThat(restaurant.getInformation()).isEqualTo("Bob Zip in Seoul");
-
+        assertThat(restaurant.getInformation()).isEqualTo("Bob zip in Seoul");
     }
-}
 
+}

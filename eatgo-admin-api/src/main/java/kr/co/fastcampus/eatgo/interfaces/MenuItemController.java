@@ -1,7 +1,7 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
 import kr.co.fastcampus.eatgo.application.MenuItemService;
-import com.example.eatgocommon.domain.MenuItem;
+import kr.co.fastcampus.eatgo.domain.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;

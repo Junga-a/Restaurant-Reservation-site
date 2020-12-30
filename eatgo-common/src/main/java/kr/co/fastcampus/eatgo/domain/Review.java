@@ -1,30 +1,32 @@
 package kr.co.fastcampus.eatgo.domain;
 
-
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
 @Builder
-public class MenuItem {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Review {
+
     @Id
     @GeneratedValue
     private Long id;
 
+    @Setter
     private Long restaurantId;
 
     private String name;
 
-    @Transient
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private boolean destroy;
-}
+    @NotNull
+    private Integer score;
 
+    @NotEmpty
+    private String description;
+}
