@@ -1,6 +1,5 @@
 package kr.co.fastcampus.eatgo.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 

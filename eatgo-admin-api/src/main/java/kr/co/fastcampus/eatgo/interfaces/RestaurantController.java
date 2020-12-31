@@ -14,12 +14,12 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class RestaurantController {
+
     @Autowired
     private RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
     public List<Restaurant> list() {
-
         List<Restaurant> restaurants = restaurantService.getRestaurants();
 
         return restaurants;
@@ -27,7 +27,7 @@ public class RestaurantController {
 
     @GetMapping("/restaurants/{id}")
     public Restaurant detail(@PathVariable("id") Long id) {
-        Restaurant restaurant =restaurantService.getRestaurant(id);
+        Restaurant restaurant = restaurantService.getRestaurant(id);
 
         return restaurant;
     }
@@ -37,6 +37,7 @@ public class RestaurantController {
             throws URISyntaxException {
         Restaurant restaurant = restaurantService.addRestaurant(
                 Restaurant.builder()
+                        .categoryId(resource.getCategoryId())
                         .name(resource.getName())
                         .address(resource.getAddress())
                         .build());
@@ -46,14 +47,15 @@ public class RestaurantController {
     }
 
     @PatchMapping("/restaurants/{id}")
-    public String update(@PathVariable("id") Long id, @RequestBody Restaurant resource){
-        String name=resource.getName();
-        String address=resource.getAddress();
+    public String update(@PathVariable("id") Long id,
+                         @Valid @RequestBody Restaurant resource) {
+        Long categoryId = resource.getCategoryId();
+        String name = resource.getName();
+        String address = resource.getAddress();
 
-        restaurantService.updateRestaurant(id,name,address);
+        restaurantService.updateRestaurant(id, categoryId, name, address);
 
         return "{}";
     }
+
 }
-
-

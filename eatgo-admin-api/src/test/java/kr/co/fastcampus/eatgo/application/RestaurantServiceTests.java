@@ -13,12 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
-class RestaurantServiceTest {
+public class RestaurantServiceTests {
+
     @InjectMocks
     private RestaurantService restaurantService;
 
@@ -29,15 +30,14 @@ class RestaurantServiceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        MockRestaurantRepository();
-
-        restaurantService = new RestaurantService(restaurantRepository);
+        mockRestaurantRepository();
     }
 
-    private void MockRestaurantRepository() {
+    private void mockRestaurantRepository() {
         List<Restaurant> restaurants = new ArrayList<>();
         Restaurant restaurant = Restaurant.builder()
                 .id(1004L)
+                .categoryId(1L)
                 .address("Seoul")
                 .name("Bob zip")
                 .build();
@@ -48,7 +48,6 @@ class RestaurantServiceTest {
         given(restaurantRepository.findById(1004L))
                 .willReturn(Optional.of(restaurant));
     }
-
 
     @Test
     public void getRestaurants() {
@@ -62,6 +61,7 @@ class RestaurantServiceTest {
     @Test
     public void getRestaurantWithExisted() {
         Restaurant restaurant = restaurantService.getRestaurant(1004L);
+
         assertThat(restaurant.getId()).isEqualTo(1004L);
     }
 
@@ -101,7 +101,7 @@ class RestaurantServiceTest {
         given(restaurantRepository.findById(1004L))
                 .willReturn(Optional.of(restaurant));
 
-        restaurantService.updateRestaurant(1004L, "Sool zip", "Busan");
+        restaurantService.updateRestaurant(1004L, 1L, "Sool zip", "Busan");
 
         assertThat(restaurant.getName()).isEqualTo("Sool zip");
         assertThat(restaurant.getAddress()).isEqualTo("Busan");
