@@ -24,10 +24,9 @@ public class RestaurantService {
         this.reviewRepository = reviewRepository;
     }
 
-    public List<Restaurant> getRestaurants(String region, long categoryId) {
+    public List<Restaurant> getRestaurants(long id) {
         List<Restaurant> restaurants =
-                restaurantRepository.findAllByAddressContainingAndCategoryId(
-                        region, categoryId);
+                restaurantRepository.findAll();
 
         return restaurants;
     }
@@ -49,11 +48,10 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    public Restaurant updateRestaurant(Long id, Long categoryId,
-                                       String name, String address) {
+    public Restaurant updateRestaurant(Long id, String name, String address) {
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
 
-        restaurant.updateInformation(categoryId, name, address);
+        restaurant.updateInformation(name, address);
 
         return restaurant;
     }

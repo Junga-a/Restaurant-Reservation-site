@@ -37,7 +37,6 @@ public class RestaurantController {
             throws URISyntaxException {
         Restaurant restaurant = restaurantService.addRestaurant(
                 Restaurant.builder()
-                        .categoryId(resource.getCategoryId())
                         .name(resource.getName())
                         .address(resource.getAddress())
                         .build());
@@ -49,11 +48,10 @@ public class RestaurantController {
     @PatchMapping("/restaurants/{id}")
     public String update(@PathVariable("id") Long id,
                          @Valid @RequestBody Restaurant resource) {
-        Long categoryId = resource.getCategoryId();
         String name = resource.getName();
         String address = resource.getAddress();
 
-        restaurantService.updateRestaurant(id, categoryId, name, address);
+        restaurantService.updateRestaurant(id, name, address);
 
         return "{}";
     }
