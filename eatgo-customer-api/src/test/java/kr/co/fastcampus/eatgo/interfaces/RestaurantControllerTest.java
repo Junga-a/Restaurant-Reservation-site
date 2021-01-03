@@ -40,7 +40,7 @@ public class RestaurantControllerTest {
                 .address("Seoul")
                 .build());
 
-        given(restaurantService.getRestaurants("Seoul", 1L))
+        given(restaurantService.getRestaurants())
                 .willReturn(restaurants);
 
         mvc.perform(get("/restaurants?region=Seoul&category=1"))

@@ -1,6 +1,8 @@
 package kr.co.fastcampus.eatgo.application;
 
-import kr.co.fastcampus.eatgo.domain.*;
+import kr.co.fastcampus.eatgo.domain.Restaurant;
+import kr.co.fastcampus.eatgo.domain.RestaurantNotFoundException;
+import kr.co.fastcampus.eatgo.domain.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +14,14 @@ import java.util.List;
 public class RestaurantService {
 
     private RestaurantRepository restaurantRepository;
-    private MenuItemRepository menuItemRepository;
-    private ReviewRepository reviewRepository;
 
     @Autowired
-    public RestaurantService(RestaurantRepository restaurantRepository,
-                             MenuItemRepository menuItemRepository,
-                             ReviewRepository reviewRepository) {
+    public RestaurantService(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
-        this.menuItemRepository = menuItemRepository;
-        this.reviewRepository = reviewRepository;
     }
 
-    public List<Restaurant> getRestaurants(long id) {
-        List<Restaurant> restaurants =
-                restaurantRepository.findAll();
+    public List<Restaurant> getRestaurants() {
+        List<Restaurant> restaurants = restaurantRepository.findAll();
 
         return restaurants;
     }
@@ -35,12 +30,6 @@ public class RestaurantService {
         Restaurant restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new RestaurantNotFoundException(id));
 
-        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
-        restaurant.setMenuItems(menuItems);
-
-        List<Review> reviews = reviewRepository.findAllByRestaurantId(id);
-        restaurant.setReviews(reviews);
-
         return restaurant;
     }
 
@@ -48,10 +37,12 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    public Restaurant updateRestaurant(Long id, String name, String address) {
+    @Transactional
+    public Restaurant updateRestaurant(Long id, Long categoryId,
+                                       String name, String address) {
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
 
-        restaurant.updateInformation(name, address);
+        restaurant.updateInformation(categoryId, name, address);
 
         return restaurant;
     }
