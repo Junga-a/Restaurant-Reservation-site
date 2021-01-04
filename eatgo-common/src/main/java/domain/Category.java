@@ -1,4 +1,4 @@
-package kr.co.fastcampus.eatgo.domain;
+package domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Region {
+public class Category {
 
     @Id
     @GeneratedValue

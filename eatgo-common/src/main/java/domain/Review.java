@@ -1,4 +1,4 @@
-package kr.co.fastcampus.eatgo.domain;
+package domain;
 
 import lombok.*;
 
