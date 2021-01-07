@@ -6,4 +6,7 @@ include 'eatgo-customer-api'
 include 'eatgo-common'
 include 'eatgo-login-api'
 include 'eatgo-login-api'
+include 'eatgo-login-api'
+include 'eatgo-login-api'
+include 'eatgo-login-api'
 

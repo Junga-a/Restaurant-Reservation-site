@@ -39,4 +39,5 @@ public class CategoryServiceTests {
         Category category = categories.get(0);
         assertThat(category.getName()).isEqualTo("Korean Food");
     }
+
 }

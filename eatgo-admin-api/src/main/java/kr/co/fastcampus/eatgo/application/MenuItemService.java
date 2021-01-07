@@ -1,5 +1,6 @@
 package kr.co.fastcampus.eatgo.application;
 
+
 import kr.co.fastcampus.eatgo.domain.MenuItem;
 import kr.co.fastcampus.eatgo.domain.MenuItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;

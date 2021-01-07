@@ -87,7 +87,7 @@ public class RestaurantServiceTests {
         Long categoryId = 1L;
 
         List<Restaurant> restaurants =
-                restaurantService.getRestaurants();
+                restaurantService.getRestaurants(region, categoryId);
 
         Restaurant restaurant = restaurants.get(0);
 

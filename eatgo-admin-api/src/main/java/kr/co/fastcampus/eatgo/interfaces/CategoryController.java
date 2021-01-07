@@ -1,7 +1,8 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
-import kr.co.fastcampus.eatgo.application.CategoryService;
 import kr.co.fastcampus.eatgo.domain.Category;
+import kr.co.fastcampus.eatgo.domain.CategoryRepository;
+import kr.co.fastcampus.eatgo.application.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class CategoryController {
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Autowired
     private CategoryService categoryService;
